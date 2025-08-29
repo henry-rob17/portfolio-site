@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Henry Robinson — Portfolio</title>
+  <meta name="description" content="Portfolio of Henry Robinson — Computer Science student and developer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #121620;
+      --text: #e8ecf1;
+      --muted: #a8b0bb;
+      --accent: #6ee7ff;
+      --accent-2: #a78bfa;
+      --card: #0f131b;
+      --border: #232a36;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+      background: radial-gradient(1200px 800px at 100% -10%, rgba(108, 92, 231,.25), transparent 50%),
+                  radial-gradient(1000px 1000px at -10% -10%, rgba(46, 196, 255,.15), transparent 50%), var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: linear-gradient(180deg, rgba(11,13,18,.8), rgba(11,13,18,.4));
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .brand { font-weight: 800; letter-spacing: .4px; }
+    .brand .dot { color: var(--accent); }
+    nav a { margin-left: 18px; color: var(--muted); font-weight: 600; }
+    nav a:hover { color: var(--text); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: linear-gradient(180deg, #151924, #0e121a); box-shadow: var(--shadow); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn .badge { font-size: 12px; font-weight: 700; color: #0b0d12; background: linear-gradient(90deg, var(--accent), var(--accent-2)); padding: 4px 8px; border-radius: 999px; }
+
+    /* Hero */
+    .hero { padding: 64px 0 48px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: center; }
+    .hero h1 { font-size: clamp(32px, 6vw, 54px); line-height: 1.05; margin: 0 0 14px; }
+    .hero p { color: var(--muted); font-size: clamp(16px, 2.2vw, 18px); }
+    .tagrow { display:flex; flex-wrap:wrap; gap:10px; margin: 18px 0 26px; }
+    .tag { border: 1px solid var(--border); background: var(--card); padding: 6px 10px; border-radius: 999px; font-size: 13px; color: var(--muted); }
+    .hero-card { border:1px solid var(--border); background: linear-gradient(180deg,#111522,#0d1119); padding: 16px; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero-card h3 { margin: 8px 0 10px; }
+    .statgrid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .stat { background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 12px; text-align:center; }
+    .stat .big { font-weight: 800; font-size: 22px; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .section-title { display:flex; align-items:center; justify-content:space-between; margin-bottom: 18px; }
+    .section-title h2 { margin: 0; font-size: 26px; }
+    .grid { display: grid; gap: 16px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .card { border:1px solid var(--border); background: linear-gradient(180deg,#101521,#0c1017); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 8px; }
+    .card p { color: var(--muted); margin: 0 0 12px; }
+    .pill { font-size: 12px; color: var(--muted); border: 1px solid var(--border); background: #0b0f15; padding: 4px 8px; border-radius: 999px; margin-right: 8px; }
+
+    .projects .thumb { border:1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 10px; aspect-ratio: 16/9; background: #0b0f15; display:flex; align-items:center; justify-content:center; color: var(--muted); }
+    .projects .actions { display:flex; gap:10px; margin-top: 12px; }
+    .projects .actions a { flex:1; text-align:center; border: 1px solid var(--border); padding: 10px 12px; border-radius: 10px; background: var(--card); }
+
+    .skills .skill { display:flex; justify-content:space-between; align-items:center; border:1px dashed var(--border); padding: 12px; border-radius: 12px; }
+
+    .timeline { border-left: 2px solid var(--border); padding-left: 16px; }
+    .tl-item { margin-bottom: 18px; }
+    .tl-item h4 { margin: 0; }
+    .tl-item .small { color: var(--muted); font-size: 14px; }
+
+    footer { border-top: 1px solid var(--border); padding: 30px 0; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid.cols-3 { grid-template-columns: 1fr; }
+      .grid.cols-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Henry<span class="dot">.</span></div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="Henry_Robinson_Resume.pdf" target="_blank" rel="noopener">
+          <span class="badge">PDF</span> Resume
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div>
+        <h1>Computer Science student building delightful, reliable software.</h1>
+        <p>
+          I design and ship apps across web and desktop with a focus on performance, clean UI, and practical impact.
+          Currently exploring AI/ML, systems, and developer experience.
+        </p>
+        <div class="tagrow">
+          <span class="tag">Python • Flask • PyQt</span>
+          <span class="tag">MySQL • SQL</span>
+          <span class="tag">React • HTML/CSS</span>
+          <span class="tag">Linux • Arch • Hyprland</span>
+        </div>
+        <div class="tagrow">
+          <a class="btn" href="#projects">See projects</a>
+          <a class="btn" href="mailto:henry@example.com">Email me</a>
+          <a class="btn" href="https://github.com/henry-rob17" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Highlighted Project — PII Redaction System</h3>
+        <p>OCR + ML pipeline that detects and redacts sensitive information in PDFs with a PyQt UI and Flask API.</p>
+        <div class="statgrid">
+          <div class="stat"><div class="big">98%</div><div>Precision (PII)</div></div>
+          <div class="stat"><div class="big">~2s</div><div>per page</div></div>
+          <div class="stat"><div class="big">+3</div><div>models compared</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <a href="https://github.com/henry-rob17?tab=repositories" class="btn" target="_blank" rel="noopener">All repos →</a>
+      </div>
+      <div class="grid cols-3">
+        <!-- Project card 1 -->
+        <article class="card">
+          <div class="thumb">Screenshot / GIF</div>
+          <h3>PII Redaction System</h3>
+          <p>End-to-end PDF redaction with OCR, spaCy/TF-IDF classifiers, and PyQt desktop UI.</p>
+          <div>
+            <span class="pill">Python</span>
+            <span class="pill">Flask</span>
+            <span class="pill">PyQt</span>
+            <span class="pill">MySQL</span>
+          </div>
+          <div class="actions">
+            <a href="https://pii-redaction-demo.netlify.app" target="_blank">Live</a>
+            <a href="https://github.com/henry/pii-redaction" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <!-- Project card 2 -->
+        <article class="card">
+          <div class="thumb">Screenshot / GIF</div>
+          <h3>Movie Booking System</h3>
+          <p>Role-based booking app with admin/manager/volunteer flows and robust database schema.</p>
+          <div>
+            <span class="pill">Python</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">PyQt</span>
+          </div>
+          <div class="actions">
+            <a href="https://movie-booking-demo.netlify.app" target="_blank">Live</a>
+            <a href="https://github.com/henry/movie-booking" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <!-- Project card 3 -->
+        <article class="card">
+          <div class="thumb">Screenshot / GIF</div>
+          <h3>ReliefAssist</h3>
+          <p>Disaster-management web app coordinating tasks/resources across incidents with RBAC.</p>
+          <div>
+            <span class="pill">Flask</span>
+            <span class="pill">SQL</span>
+            <span class="pill">HTML</span>
+          </div>
+          <div class="actions">
+            <a href="https://reliefassist-demo.netlify.app" target="_blank">Live</a>
+            <a href="https://github.com/henry/reliefassist" target="_blank">Code</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <span class="pill">Actively learning: Rust, Kubernetes</span>
+      </div>
+      <div class="grid cols-2">
+        <div class="skill"><strong>Languages</strong><span>Python, C/C++, SQL, JavaScript</span></div>
+        <div class="skill"><strong>Frameworks</strong><span>Flask, PyQt, React</span></div>
+        <div class="skill"><strong>Data/ML</strong><span>scikit-learn, pandas, NumPy</span></div>
+        <div class="skill"><strong>Tools</strong><span>Git, Linux (Arch), Docker</span></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE / EDUCATION -->
+    <section id="experience">
+      <div class="section-title">
+        <h2>Experience & Education</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <h4>Texas Tech University — B.S. Computer Science</h4>
+          <div class="small">2021–2025 • Lubbock, TX</div>
+          <p>Focus on systems, AI/ML, and software engineering. Course projects in OS, DB, Networking, and Architecture.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Delta Epsilon Psi — Marketing Chair</h4>
+          <div class="small">Leadership & Organization</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <span class="pill">Open to internships & full-time roles</span>
+      </div>
+      <div class="card">
+        <p>Best way to reach me is email. I reply within 24 hours.</p>
+        <p><a class="btn" href="mailto:henry@example.com">henry@example.com</a></p>
+        <p>
+          <a class="btn" href="https://github.com/henry-rob17" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/henry-robinson-380727328/" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Henry Robinson. Built with HTML/CSS.</div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^=\"#\"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+      })
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Henry Robinson",
+    "url": "https://your-domain.example",
+    "sameAs": [
+      "https://github.com/henry-rob17",
+      "https://www.linkedin.com/in/henry-robinson-380727328/"
+    ],
+    "jobTitle": "Computer Science Student",
+    "alumniOf": "Texas Tech University"
+  }
+  </script>
+</body>
+</html>
